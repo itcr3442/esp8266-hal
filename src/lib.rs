@@ -23,6 +23,11 @@ pub mod timer;
 pub mod uart;
 pub mod watchdog;
 
+extern "C" {
+    // todo: replace this with a rust implementation
+    fn Cache_Read_Enable(map: u8, p: u8, v: u8);
+}
+
 /// Function handling ESP8266 specific initialization
 /// then calls original Reset function
 ///
@@ -39,7 +44,7 @@ pub unsafe extern "C" fn ESP8266Reset() -> ! {
         static mut _rtc_bss_start: u32;
         static mut _rtc_bss_end: u32;
     }
-
+    Cache_Read_Enable(0, 0, 0);
     // configure the pll for the most common crystal frequency
     use esp8266::Peripherals;
     use rtccntl::{CrystalFrequency, RtcControlExt};

@@ -26,10 +26,10 @@ all_in_ram = []
 interrupt = ["paste"]
 
 [profile.dev]
-lto = true
+lto = false
 
 [profile.release]
-lto = true
+lto = false
 
 [dev-dependencies]
 panic-halt = "0.2.0"
